@@ -40,24 +40,30 @@ bas = load('bas.mat');
 
 This part of the code is meant to be changed by a user. Following data can be modified:
 
-* p ... number of iterations in smoothing loop. We recomend using 7 or 8 iterations of smoothing process. The reason is described in repository which presents the smoothing code itself.
+* p ... number of iterations in smoothing loop. We recommend using 7 or 8 iterations of smoothing process. The reason is described in repository which presents the smoothing code itself.
 
-* seq... sequence of base pairs of plasmid whos atomic structure is simulated
+* seq ... sequence of base pairs of plasmid whos atomic structure is simulated
 
-* F,B... number of file which will be smoothed and placing of the first file to be smoothed
+* F,B ... number of file which will be smoothed and placing of the first file to be smoothed
 
-* bas.mat... structure wtih model of base pairs, loaded from PDB files. There is no need for using Bioinformatics toolbox with this structure.
+* bas.mat ... structure with model of base pairs, loaded from PDB files. There is no need for using Bioinformatics toolbox with this structure.
 
 
 
 ### Running the smoothing process ###
 
 ```
-[ekvipoint,cos,lenghts,elengths] = auto_amooth(p,incurve,N);
+[ekvipoint,cos,lenghts,elengths] = auto_smooth(p,incurve,N);
 ```
 
-This line of the code is running the smoothing process. It begins with iterative smoothing and ends with computing positions of points which represent location of base pairs. 
+This line of the code is running the smoothing process. It begins with iterative smoothing and ends with computing positions of points which represent location of base pairs.
 
+If the line´s center isn´t placed in [0,0,0], function curve_centering can be used for it. It counts a center of the structure and moves it to [0,0,0]. An exemple of using this function is shown on following lines. We recommend to use it before computing positions of atoms with function tr.
+
+```
+[ekvipoint,cos,lenghts,elengths] = auto_smooth(p,incurve,N);
+ekvi_center = curve_centering(ekvipoint);
+```
 
 ### Checking correctness of smoothing process and computing positions of atoms ###
 
@@ -99,11 +105,11 @@ a = auto_check(cos,lenghts,elengths);
     end
 ```
 
-This part of the code is running a check of correctness of the smoothing process with function auto_check. 
+This part of the code is running a check of correctness of the smoothing process with function auto_check.
 
 If the structure of points representing positions of base pairs passes the check of corrertness, position of each atom in molecule with be calcuted and written down in pdb file with programme tr.m.
 
-If the structure doesn't pass the check, there the number of iterations is reduced once or twice and the whole process of smoothing and checking is running again. If structure calcuted during this process is correct, programme tr.m will be apllied. In case of the fact that the structure doesn't pass the criteria again, it will remote from the whole process. 
+If the structure doesn't pass the check, there the number of iterations is reduced once or twice and the whole process of smoothing and checking is running again. If structure calcuted during this process is correct, programme tr.m will be apllied. In case of the fact that the structure doesn't pass the criteria again, it will remote from the whole process.
 
 ### Contacts ###
 If you have any comments or suggestions, we'll be glad to hear them.
