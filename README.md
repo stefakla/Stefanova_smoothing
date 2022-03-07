@@ -58,7 +58,7 @@ This part of the code is meant to be changed by a user. Following data can be mo
 
 This line of the code is running the smoothing process. It begins with iterative smoothing and ends with computing positions of points which represent location of base pairs.
 
-If the line´s center isn´t placed in [0,0,0], function curve_centering can be used for it. It counts a center of the structure and moves it to [0,0,0]. An exemple of using this function is shown on following lines. We recommend to use it before computing positions of atoms with function tr.
+If the line's center isn't placed in [0,0,0], function curve_centering can be used for it. It counts a center of the structure and moves it to [0,0,0]. An exemple of using this function is shown on following lines. We recommend to use it before computing positions of atoms with function tr.
 
 ```
 [ekvipoint,cos,lenghts,elengths] = auto_smooth(p,incurve,N);
